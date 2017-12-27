@@ -32,8 +32,7 @@ RUN addgroup -S verdaccio && adduser -S -G verdaccio verdaccio && \
 
 USER verdaccio
 
-# run on 80
-ENV PORT 80
+ENV PORT 4873
 ENV PROTOCOL http
 
 EXPOSE $PORT
