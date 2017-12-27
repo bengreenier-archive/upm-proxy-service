@@ -3,8 +3,7 @@ LABEL maintainer="https://github.com/verdaccio/verdaccio"
 
 RUN apk --no-cache add openssl && \
     wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
-    chmod +x /usr/local/bin/dumb-init && \
-    apk del openssl
+    chmod +x /usr/local/bin/dumb-init
 
 ENV APPDIR /usr/local/app
 
@@ -25,10 +24,18 @@ RUN mkdir -p /verdaccio/storage /verdaccio/conf
 
 # use our upm config
 ADD conf/upm-proxy.yaml /verdaccio/conf/config.yaml
+ADD conf/openssl.conf /verdaccio/conf/openssl.conf
 
-# run on 80
-ENV PORT 80
-ENV PROTOCOL http
+# create the ssl cert
+RUN openssl req -x509 -nodes -days %days% -newkey rsa:2048 -keyout /verdaccio/conf/server.pem -out /verdaccio/conf/server.pem -config /verdaccio/conf/openssl.conf && \
+    openssl pkcs12 -export -out /verdaccio/conf/server.pfx -in /verdaccio/conf/server.pem -passout pass:
+
+# done with openssl now
+RUN apk del openssl
+
+# run on 443
+ENV PORT 443
+ENV PROTOCOL https
 
 EXPOSE $PORT
 
