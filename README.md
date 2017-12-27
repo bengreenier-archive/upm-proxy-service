@@ -1,5 +1,7 @@
 # upm-proxy-service
 
+[Docker Hub](https://hub.docker.com/r/bengreenier/upm-proxy-service/)
+
 > Note: this is completely unoffical, and Unity will likely release their own version in the future.
 
 A proxy upm service, to allow users to mix in private packages. Basically this just
