@@ -1,3 +1,3 @@
 [submodule "verdaccio"]
 	path = verdaccio
-	url = git@github.com:verdaccio/verdaccio.git
+	url = https://github.com/verdaccio/verdaccio.git
