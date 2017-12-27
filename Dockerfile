@@ -14,7 +14,7 @@ ADD ./verdaccio $APPDIR
 
 ENV NODE_ENV=production
 
-RUN npm config set registry http://packages.unity.com/ && \
+RUN npm config set registry http://registry.npmjs.org/ && \
     npm install -g -s --no-progress yarn@0.28.4 --pure-lockfile && \
     yarn install --production=false && \
     yarn run build:webui && \
