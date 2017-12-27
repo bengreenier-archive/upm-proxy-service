@@ -26,13 +26,8 @@ RUN mkdir -p /verdaccio/storage /verdaccio/conf
 # use our upm config
 ADD conf/upm-proxy.yaml /verdaccio/conf/config.yaml
 
-RUN addgroup -S verdaccio && adduser -S -G verdaccio verdaccio && \
-    chown -R verdaccio:verdaccio "$APPDIR" && \
-    chown -R verdaccio:verdaccio /verdaccio
-
-USER verdaccio
-
-ENV PORT 4873
+# run on 80
+ENV PORT 80
 ENV PROTOCOL http
 
 EXPOSE $PORT
