@@ -28,6 +28,9 @@ uplinks:
   upmpackages:
     url: https://packages.unity.com/
 
+publish:
+  allow_offline: true
+
 packages:
   '@*/*':
     # scoped packages
